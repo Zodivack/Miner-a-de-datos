@@ -1,3 +1,4 @@
 *csv filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
 DataSet_MCSR_Rancked_Temporada[[:space:]]10/mcsr_ranked_season_10_aux.csv filter=lfs diff=lfs merge=lfs -text
