@@ -187,13 +187,6 @@ def clasificar_variable(columna, serie):
         return "Numerica", "Minimo, Maximo, Media, Moda, Conteo, Sumatoria, Curtosis, Varianza, Desviacion estandar"
     return "Texto", "Conteo, Moda"
 
-def obtener_observacion_nulos(porcentaje):
-    if porcentaje >= UMBRAL_ALTA_AUSENCIA:
-        return "Alta ausencia: interpretar con precaucion"
-    if porcentaje > 0:
-        return "Presenta valores faltantes"
-    return ""
-
 def generar_inventario(tablas):
     imprimir_titulo("INVENTARIO Y CLASIFICACION DE VARIABLES")
     inventario = []
@@ -271,9 +264,9 @@ def generar_estadistica_descriptiva(tablas):
     resultados_estadistica = []
     for nombre, columnas in VARIABLES_NUMERICAS.items():
         for columna in columnas:
-            if columna not in tablas[nombre].columns: continue
-            estadisticas = calcular_estadisticas(tablas[nombre][columna])
-            resultados_estadistica.append({"tabla": nombre, "variable": columna, **estadisticas})
+            if columna in tablas[nombre].columns:
+                estadisticas = calcular_estadisticas(tablas[nombre][columna])
+                resultados_estadistica.append({"tabla": nombre, "variable": columna, **estadisticas})
 
     df_estadisticas = pd.DataFrame(resultados_estadistica)
     guardar_dataframe(df_estadisticas, SALIDA_ESTADISTICAS)
